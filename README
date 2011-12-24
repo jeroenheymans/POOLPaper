@@ -16,19 +16,32 @@ The proposition to compare Ruby and C++ is accepted
 ***********************
 * Subjects to discuss *
 ***********************
- - inheritance (multiple vs. mix-in)
+ - class-based inheritance (multiple vs. mix-in)
     - multiple (C++):
         - explicit reference to super
         - virtual inheritance
     - mix-in (Ruby)
  - polymorphism
  - static vs. dynamic typing
+    - Dynamic Dispatch = Late Binding (Ruby)
+    vs
+    - Static Dispatch = Early Binding (C++)
+    - Single Dispatch = Message Passing (Ruby & C++)
  - interfaces?
  - clonable objects
  - reflection
  - everything is (not) an object
  - compare behaviour of super
  - compare behaviour of this/self 
+ - partial classes (Ruby) vs "complete classes" (C++)
+ - access control (public, protected, private, ?)
+ 
+*********************
+* Interesting links *
+*********************
+http://onestepback.org/articles/poly/
+http://www.google.be/url?sa=t&rct=j&q=ruby%20c%2B%2B%20object%20oriented%20comparison&source=web&cd=30&ved=0CHAQFjAJOBQ&url=http%3A%2F%2Fwww.itescam.edu.mx%2Fprincipal%2Fsylabus%2Ffpdb%2Frecursos%2Fr76064.PPTX&ei=PKz1TsKsJ4_qOd-ombUB&usg=AFQjCNEo1PvHO8jlN6dhPZtyrClQcOIRWg&sig2=EZutaIAK2XtTZQw_Jw5hKw
+http://www.wellho.net/resources/C234.html
 
 *********************
 * Language features *
