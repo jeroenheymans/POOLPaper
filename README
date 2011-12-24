@@ -1,3 +1,54 @@
+***********************
+* General Information *
+***********************
 This repository contains all the code necessary for the paper where I compare two programming languages. This paper is written for the course Principles of Object Oriented Languages, which is a master-course on the Vrije Universiteit Brussel.
+This paper is written by me, Jeroen Heymans.
 
+***********
+* Roadmap *
+***********
+23/12/2011
 At the moment, the suggestion is send to the assistant and the professor. I proposed the comparison of Ruby and C++
+
+24/12/2011
+The proposition to compare Ruby and C++ is accepted
+
+*********************
+* Language features *
+*********************
+Ruby
+    Paradigms: object-oriented, imperative, reflective, functional
+    Scope: lexical, sometimes dynamic
+    Typing: duck, dynamic
+    Runtime access to method names: yes
+    Runtime access to class names: yes
+    Runtime access to isntance variable names: yes
+    Forwarding: yes
+    Metaclasses: yes
+    Inheritance: mix-in
+    Access to super method: super
+    Root class: Object
+    Receiver name: self
+    Private data: yes
+    Private methods: yes
+    Class variables: yes
+    Templates: not needed
+    
+C++
+    Paradigms: object-oriented, procedural, generic
+    Scope: global or local
+    Typing: static
+    Runtime access to method names: no
+    Runtime access to class names: no
+    Runtime access to isntance variable names: no
+    Forwarding: no
+    Metaclasses: no
+    Inheritance: multiple
+    Access to super method: Superclass::method
+    Root class: none
+    Receiver name: this
+    Private data: yes
+    Private methods: yes
+    Class variables: yes
+    Templates: yes
+    
