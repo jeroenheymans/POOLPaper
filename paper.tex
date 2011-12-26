@@ -1,0 +1,91 @@
+\documentclass[10pt,a4paper,twocolumn]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage{ucs}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{color}
+\definecolor{codebg}{rgb}{0.9,0.9,0.9}
+\usepackage{listings}
+\lstset{language=C++,
+backgroundcolor=\color{codebg},
+numbers=left,
+xleftmargin=17pt,
+framexleftmargin=17pt,
+basicstyle=\scriptsize,
+numberstyle=\scriptsize,
+tabsize=2}
+\author{Jeroen Heymans}
+\title{Comparison of two object-oriented languages: C++ and Ruby}
+\begin{document}
+\maketitle
+
+\section{Introduction}
+
+\subsection{Foreword}
+This paper is written for the master course Principles of Object Oriented Languages on the VUB. It contains a comparison between two languages that contain object-oriented features. 
+
+\subsection{The compared languages}
+The choice for this paper was C++, a well-known static typed language with good object oriented features, and Ruby, a dynamic typed language that was designed to be as object-oriented as possible.
+
+\subsubsection{C++}
+Originally called "C with classes", C++ is a multi-paradigm language based on the popular language C. C++ doesn't require you to write all code in an object-oriented fashion, it is also possible to write all your code in functions.
+
+\subsubsection{Ruby}
+The creator of Ruby, Ykihiro Matsumoto, looked at other languages to find an ideal syntax. He watned a scripting language that was more powerful than Perl and more object-oriented than Python. In Ruby, everything is an object. It was influenced by Smalltalk, every type was given methods instance variables.
+
+\subsection{What follows next}
+We will compare several important features that belong to object-oriented languages like inheritance, polymorphism, access control and many more.
+
+\section{Comparisons}
+
+\subsection{Classes}
+In object-oriented programming, a class is a blueprint that is used to construct objects which we call object instances. We compare the several types of classes that can be made.
+
+\subsubsection{Abstract classes}
+An abstract class is a class that can not be instantiated for it is either labelled as abstract or it specifies abstract methods. The general idea of abstract classes is that the class must be extended. In C++, an abstract class is a class having at least one pure virtual function. For example, this is an abstract class in C++:
+\begin{lstlisting}
+class A {
+	public:
+		virtual void f() = 0;
+};
+\end{lstlisting}
+
+Abstract classes in Ruby are however a different story. Unlike some object-oriented languages, Ruby does not support a keyword "abstract" or a way like C++ to define an abstract class. However, the programmer himself can force a class to be extended when he makes \textit{:new} private. The extending class must then make \textit{:new} public:
+\begin{lstlisting}[language=Ruby]
+class A
+	private_class_method :new
+	def initialize(txt = "Hello!")
+		puts txt
+	end
+end
+
+class B < A
+	public_class_method :new
+end
+\end{lstlisting}
+
+\subsubsection{Concrete classes}
+
+\subsubsection{Inner classes}
+
+\subsubsection{Metaclasses}
+In Ruby, a class is also an object. Each class is an instance of the unique metaclass which is built in the language.
+
+\subsubsection{Non-subclassable}
+
+\subsubsection{Partial classes}
+
+\subsubsection{Uninstantiable classes}
+
+\subsection{Inheritance}
+
+\section{Conclusion}
+
+\section{References}
+http://www.ruby-lang.org/en/about/
+http://www.cplusplus.com/info/history/
+http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Fcplr142.htm
+http://www.klankboomklang.com/2007/10/05/the-metaclass/
+
+\end{document}
