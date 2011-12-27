@@ -79,13 +79,63 @@ In Ruby, a class is also an object. Each class is an instance of the unique meta
 \subsubsection{Uninstantiable classes}
 
 \subsection{Inheritance}
+In Ruby, a class can only inherit from a single other class. Some other languages like C++ support multiple inheritance, a feature that allows classes to inherit features from multiple classes.
+\begin{lstlisting}[language=Ruby]
+class Animal
+	def breath
+		puts "Breathe"
+	end
+	def speak
+		puts "Random noise"
+	end
+end
+
+class Cat < Animal
+	def speak
+		puts "Meow"
+	end
+end
+\end{lstlisting}
+When using these two classes, one can see that methods will be overriden:
+\begin{lstlisting}[language=Ruby]
+cat = Cat.new
+cat.speak
+cat.breath
+\end{lstlisting}
+This will output:
+\begin{lstlisting}
+Random noise
+Breathe
+\end{lstlisting}
+Inheritance in C++ is more advanced as it supports multiple inheritance.
+
+Ruby mixin's.
+
+\subsection{Access control}
+
+\subsection{The use of super and this/self}
+
+\subsection{Polymorphism}
+
+\subsection{Interfaces}
+
+\subsection{Reflection}
+
+\subsection{Clonable objects}
+
+\subsection{Everything is an object?}
 
 \section{Conclusion}
 
 \section{References}
 http://www.ruby-lang.org/en/about/
 http://www.cplusplus.com/info/history/
-http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Fcplr142.htm
+http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=\%2Fcom.ibm.xlcpp8l.doc\%2Flanguage\%2Fref\%2Fcplr142.htm
 http://www.klankboomklang.com/2007/10/05/the-metaclass/
+http://ruby-extra.rubyforge.org/classes/Object.html
+http://www.wikyblog.com/AmanKing/Metaclass_in_Ruby
+http://www.klankboomklang.com/2007/10/12/objects-classes-and-jruby-internals/
+http://shiningthrough.co.uk/A-comparison-of-Ruby-pass-by-reference-and-C++-pass-by-reference
+http://rubylearning.com/satishtalim/ruby_inheritance.html
 
 \end{document}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.12.24)  26 DEC 2011 23:16
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.12.24)  27 DEC 2011 23:16
 entering extended mode
  %&-line parsing enabled.
 **paper.tex
@@ -232,44 +232,125 @@ Underfull \vbox (badness 1484) has occurred while \output is active []
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 86--90
+! Missing $ inserted.
+<inserted text> 
+                $
+l.136 http://www.wikyblog.com/AmanKing/Metaclass_
+                                                 in_Ruby
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.140 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 131--140
 \OT1/cmr/m/n/10 http://www.ruby-lang.org/en/about/
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 86--90
+Underfull \hbox (badness 10000) in paragraph at lines 131--140
 \OT1/cmr/m/n/10 http://www.cplusplus.com/info/history/
  []
 
 
-Overfull \hbox (349.11269pt too wide) in paragraph at lines 86--90
+Overfull \hbox (393.33502pt too wide) in paragraph at lines 131--140
 \OT1/cmr/m/n/10 http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.
-jsp?topic=http://www.klankboomklang.com/2007/10/05/the-
+jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Fcplr142.htm
  []
 
-[2
 
-] (./paper.aux) ) 
+Overfull \hbox (4.55618pt too wide) in paragraph at lines 131--140
+\OT1/cmr/m/n/10 http://www.klankboomklang.com/2007/10/05/the-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 131--140
+\OT1/cmr/m/n/10 metaclass/ http://ruby-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 131--140
+\OT1/cmr/m/n/10 extra.rubyforge.org/classes/Object.html
+ []
+
+
+Overfull \hbox (49.12952pt too wide) in paragraph at lines 131--140
+\OT1/cmr/m/n/10 http://www.wikyblog.com/AmanKing/Metaclass$[]\OML/cmm/m/it/10 n
+[]ubyhttp \OT1/cmr/m/n/10 :
+ []
+
+
+Overfull \hbox (7.07996pt too wide) in paragraph at lines 131--140
+\OML/cmm/m/it/10 ==www:klankboomklang:com=\OT1/cmr/m/n/10 2007\OML/cmm/m/it/10 
+=\OT1/cmr/m/n/10 10\OML/cmm/m/it/10 =\OT1/cmr/m/n/10 12\OML/cmm/m/it/10 =object
+s \OMS/cmsy/m/n/10 ^^@
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 131--140
+\OML/cmm/m/it/10 classes \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 and \OMS/cmsy/m/
+n/10 ^^@ \OML/cmm/m/it/10 jruby \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 internals
+=http \OT1/cmr/m/n/10 :
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 131--140
+\OML/cmm/m/it/10 ==shiningthrough:co:uk=A \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10
+ comparison \OMS/cmsy/m/n/10 ^^@
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 131--140
+\OML/cmm/m/it/10 of \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 Ruby \OMS/cmsy/m/n/10
+ ^^@ \OML/cmm/m/it/10 pass \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 by \OMS/cmsy/m
+/n/10 ^^@ \OML/cmm/m/it/10 reference \OMS/cmsy/m/n/10 ^^@
+ []
+
+
+Underfull \hbox (badness 1048) in paragraph at lines 131--140
+\OML/cmm/m/it/10 and \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 C \OT1/cmr/m/n/10 + 
++ \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 pass \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it
+/10 by \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 referencehttp \OT1/cmr/m/n/10 :
+ []
+
+
+Overfull \hbox (25.75868pt too wide) in paragraph at lines 131--140
+\OML/cmm/m/it/10 ==rubylearning:com=satishtalim=ruby[]nheritance:html$ 
+ []
+
+
+Underfull \vbox (badness 3354) has occurred while \output is active []
+
+ [2]
+(./paper.aux) ) 
 Here is how much of TeX's memory you used:
- 3853 strings out of 495061
- 49781 string characters out of 1182620
+ 3880 strings out of 495061
+ 50069 string characters out of 1182620
  141559 words of memory out of 3000000
- 7000 multiletter control sequences out of 15000+50000
- 10460 words of font info for 39 fonts, out of 3000000 for 9000
+ 7025 multiletter control sequences out of 15000+50000
+ 12159 words of font info for 47 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  33i,8n,58p,371b,1377s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx1
-0.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr
-/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texmf
--texlive/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-texlive/fon
-ts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/pub
-lic/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts
-/cm/cmr17.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb
-></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share
-/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on paper.pdf (2 pages, 129670 bytes).
+</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx10.
+pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/s
+hare/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texmf-t
+exlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/font
+s/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-texlive/fonts/type1/publ
+ic/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/
+cm/cmr12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr17.pfb
+></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/
+texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texli
+ve/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-texlive/fonts/typ
+e1/public/amsfonts/cm/cmti10.pfb>
+Output written on paper.pdf (2 pages, 157945 bytes).
 PDF statistics:
- 49 PDF objects out of 1000 (max. 8388607)
+ 57 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
