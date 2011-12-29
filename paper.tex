@@ -10,10 +10,12 @@
 \lstset{language=C++,
 backgroundcolor=\color{codebg},
 numbers=left,
-xleftmargin=17pt,
-framexleftmargin=17pt,
+xleftmargin=9pt,
+framexleftmargin=9pt,
 basicstyle=\scriptsize,
-numberstyle=\scriptsize,
+numberstyle=\scriptsize\color{gray},
+breaklines=true,
+numbersep=1pt,
 tabsize=2}
 \author{Jeroen Heymans}
 \title{Comparison of two object-oriented languages: C++ and Ruby}
@@ -50,8 +52,25 @@ class A {
 		virtual void f() = 0;
 };
 \end{lstlisting}
-
-Abstract classes in Ruby are however a different story. Unlike some object-oriented languages, Ruby does not support a keyword "abstract" or a way like C++ to define an abstract class. However, the programmer himself can force a class to be extended when he makes \textit{:new} private. The extending class must then make \textit{:new} public:
+If we are trying to compile C++ code where we have instantiated an abstract class, for example like this:
+\begin{lstlisting}
+int main() {
+   A a = new A();
+   return 0;
+}
+\end{lstlisting}
+We will receive an output from the compiler that notifies us that this operation is not allowed:
+\begin{lstlisting}
+g++ a.cpp -o a
+a.cpp: In function 'int main()':
+a.cpp:10:16: error: cannot allocate an object of abstract type 'A'
+a.cpp:3:9: note: because the following virtual functions are pure within 'A':
+a.cpp:5:16: note: virtual void A::f()
+a.cpp:10:6: error: cannot declare variable 'a' to be of abstract type 'A'
+a.cpp:3:9: note: since type 'A' has pure virtual functions
+make: *** [a] Error 1
+\end{lstlisting}
+Abstract classes in Ruby are a different story. Unlike some object-oriented languages, Ruby does not support a keyword like "abstract" or a way like C++ to define an abstract class. Ruby does not provide the necessary tools to create abstract classes. However, the programmer himself can force a class to behave like an abstract class when he makes \textit{:new} private. The extending class must then make \textit{:new} public:
 \begin{lstlisting}[language=Ruby]
 class A
 	private_class_method :new
@@ -113,6 +132,61 @@ Ruby mixin's.
 
 \subsection{Access control}
 
+\subsubsection{Derived classes}
+When declaring a derived class in C++, we can provide an access specifier: \textit{public}, \textit{protected} or \textit{private}. For example if we have the base class A, we can create subclass B from A and provide one of the three access specifiers like this:
+
+\begin{lstlisting}
+class A { };
+class B: public A { };
+\end{lstlisting}
+
+The purpose of this access specifier is to alter the access control of the members of the base class via the derived class. The access control is not altered on the original base class. An example:
+
+\begin{lstlisting}
+#include <iostream>
+
+class A {
+	public:
+		int foo;
+		A(): foo(0) {};
+};
+
+class B : public A { };
+ 
+int main()
+{
+   B* b = new B();
+   b->foo = 3;
+   std::cout << "Value foo: " << b->foo << std::endl;
+   return 0;
+}
+\end{lstlisting}
+
+When compiling and excecuting this code, the program will output correctly:
+\begin{lstlisting}
+Value foo: 3
+\end{lstlisting}
+
+If we however change the line access keyword when defining the class B to for example \textit{protected} or \textit{private} (instead of the current \textit{public}), we get a compilation error: 
+
+\begin{lstlisting}
+g++ a.cpp -o a
+a.cpp: In function 'int main()':
+a.cpp:5:7: error: 'int A::foo' is inaccessible
+a.cpp:14:7: error: within this context
+a.cpp:5:7: error: 'int A::foo' is inaccessible
+a.cpp:15:40: error: within this context
+make: *** [a] Error 1
+\end{lstlisting}
+
+When deriving a class, the following situations can occur:
+\begin{itemize}
+\item Derive as \textit{public}: public and protected members of the base class remain public and protected members of the derived class.
+\item Derive as \textit{protected}: public and protected members of the base class become protected members of the derived class.
+\item Derive as \textit{private}: public and protected members of the base class become private members of the derived class.
+\end{itemize}
+In all cases, private members of the base class remain private, e.g.: not even the derived class can access them unless there is a specific friend declaration within the base class that explicitly grants access to them.
+
 \subsection{The use of super and this/self}
 
 \subsection{Polymorphism}
@@ -137,5 +211,6 @@ http://www.wikyblog.com/AmanKing/Metaclass_in_Ruby
 http://www.klankboomklang.com/2007/10/12/objects-classes-and-jruby-internals/
 http://shiningthrough.co.uk/A-comparison-of-Ruby-pass-by-reference-and-C++-pass-by-reference
 http://rubylearning.com/satishtalim/ruby_inheritance.html
+http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=\%2Fcom.ibm.xlcpp8l.doc\%2Flanguage\%2Fref\%2Fcplr130.htm
 
 \end{document}
