@@ -17,6 +17,7 @@ numberstyle=\scriptsize\color{gray},
 breaklines=true,
 numbersep=1pt,
 tabsize=2}
+\renewcommand\refname{References}
 \author{Jeroen Heymans}
 \title{Comparison of two object-oriented languages: C++ and Ruby}
 \begin{document}
@@ -25,16 +26,16 @@ tabsize=2}
 \section{Introduction}
 
 \subsection{Foreword}
-This paper is written for the master course Principles of Object Oriented Languages on the VUB. It contains a comparison between two languages that contain object-oriented features. 
+This paper is written for the master course Principles of Object Oriented Languages on the VUB. It contains a comparison of several features from two languages that contain object-oriented features. 
 
 \subsection{The compared languages}
 The choice for this paper was C++, a well-known static typed language with good object oriented features, and Ruby, a dynamic typed language that was designed to be as object-oriented as possible.
 
 \subsubsection{C++}
-Originally called "C with classes", C++ is a multi-paradigm language based on the popular language C. C++ doesn't require you to write all code in an object-oriented fashion, it is also possible to write all your code in functions.
+Originally called "C with classes", C++ is a multi-paradigm language based on the popular language C. C++ doesn't require you to write all code in an object-oriented fashion, it is also possible to write all your code in functions. We have tested all the C++ code in this paper with the GCC compiler (version 4.5.2).
 
 \subsubsection{Ruby}
-The creator of Ruby, Ykihiro Matsumoto, looked at other languages to find an ideal syntax. He watned a scripting language that was more powerful than Perl and more object-oriented than Python. In Ruby, everything is an object. It was influenced by Smalltalk, every type was given methods instance variables.
+The creator of Ruby, Ykihiro Matsumoto, looked at other languages to find an ideal syntax. He watned a scripting language that was more powerful than Perl and more object-oriented than Python. In Ruby, everything is an object. It was influenced by Smalltalk, every type was given methods instance variables. All Ruby code was tested with Ruby version 1.9.2p0 (2010-08-18 revision 29036).
 
 \subsection{What follows next}
 We will compare several important features that belong to object-oriented languages like inheritance, polymorphism, access control and many more.
@@ -42,24 +43,29 @@ We will compare several important features that belong to object-oriented langua
 \section{Comparisons}
 
 \subsection{Classes}
-In object-oriented programming, a class is a blueprint that is used to construct objects which we call object instances. We compare the several types of classes that can be made.
+In object-oriented programming, a class is a blueprint that is used to construct objects which we call object instances. We compare the several types of classes that can be made in Ruby and C++.
 
 \subsubsection{Abstract classes}
 An abstract class is a class that can not be instantiated for it is either labelled as abstract or it specifies abstract methods. The general idea of abstract classes is that the class must be extended. In C++, an abstract class is a class having at least one pure virtual function. For example, this is an abstract class in C++:
+
 \begin{lstlisting}
 class A {
 	public:
 		virtual void f() = 0;
 };
 \end{lstlisting}
-If we are trying to compile C++ code where we have instantiated an abstract class, for example like this:
+
+If we are trying to compile C++ code where we have instantiated this abstract class, for example like this:
+
 \begin{lstlisting}
 int main() {
    A a = new A();
    return 0;
 }
 \end{lstlisting}
-We will receive an output from the compiler that notifies us that this operation is not allowed:
+
+We will receive an error message from the compiler that notifies us that this operation is not allowed:
+
 \begin{lstlisting}
 g++ a.cpp -o a
 a.cpp: In function 'int main()':
@@ -70,7 +76,9 @@ a.cpp:10:6: error: cannot declare variable 'a' to be of abstract type 'A'
 a.cpp:3:9: note: since type 'A' has pure virtual functions
 make: *** [a] Error 1
 \end{lstlisting}
-Abstract classes in Ruby are a different story. Unlike some object-oriented languages, Ruby does not support a keyword like "abstract" or a way like C++ to define an abstract class. Ruby does not provide the necessary tools to create abstract classes. However, the programmer himself can force a class to behave like an abstract class when he makes \textit{:new} private. The extending class must then make \textit{:new} public:
+
+Abstract classes in Ruby are a different story. Unlike some object-oriented languages, Ruby does not support a keyword like "abstract" or a way like C++ to define an abstract class. Actually, Ruby does not provide the necessary tools to create abstract classes. However, the programmer himself can force a class to behave like an abstract class when he makes \textit{:new} (the constructor) private. The extending class must then make \textit{:new} public:
+
 \begin{lstlisting}[language=Ruby]
 class A
 	private_class_method :new
@@ -84,18 +92,105 @@ class B < A
 end
 \end{lstlisting}
 
-\subsubsection{Concrete classes}
+As long as there is no class that extends A, the methods in A will never be accesible.
+
+\subsubsection{Final classes}
+Final classes are not supported in C++ nor Ruby however there exist mechanisms to prevent programmers from extending other classes. Note: is a Ruby class really final as it is open?
 
 \subsubsection{Inner classes}
+Inner classes are called nested classes in Ruby. They can simply be defined like you would expect:
+
+\begin{lstlisting}[language=Ruby]
+class A
+	attr_accessor :a
+	def initialize
+		@a = "a"
+	end
+	def f
+		puts @a
+	end
+	class B
+		attr_accessor :b
+		def initialize 
+			@b = "b"
+		end
+		def g
+			puts @a
+		end
+	end
+end
+\end{lstlisting}
+
+We can then construct an object of the type \textit{A} and \textit{A::B}:
+
+\begin{lstlisting}[language=Ruby]
+b = A::B.new
+a = A.new
+\end{lstlisting}
+
+With the \textit{::} operator in \textit{A::B}, we simply say: "Take class B that is defined inside the scope of A". The object of class B can be treated like it was never defined in A. Both access can exist completely on their own, if you make an instance of A, this will not indirectly create an instance of B and vice-versa. This means that an instance of B will not have access to the methods and members of A, only to the methods and members of its own instance. The same goes for an instance of A. Only if there is an explicit construction of an object B or A in respectively A or B, they will be able to access the methods and members.
+
+With inner classes in C++, almost the same story exists. In order to access data from the inner class via the outer class or from the outer class via the inner class, an instance must be present to access this data. This can be achieved when constructing the inner or outer class:
+
+\begin{lstlisting}
+#include <iostream>
+
+class A {
+	private:
+		int a;
+	public:
+		A(int newA): a(newA), b(this) { }
+		class B {
+			public:
+				B(A* a): outer(a), test(1) { }
+				int f() {
+					return outer->a;
+				}
+				A* outer;
+			public:
+				int test;
+		} b;
+		int f() {
+			return b.test;
+		}
+};
+ 
+int main()
+{
+   A a = A(3);
+   std::cout << a.b.f() << std::endl;
+   std::cout << a.f() << std::endl;
+   return 0;
+}
+\end{lstlisting}
+
+Let us explain the code. What we have here are two classes: A as an outer class and B as an inner class. Upon construction of A, we automatically call the constructor of B with an instance of A. With this, B has a pointer that points to the object of A. A itself remembers the pointer to B that has been constructed. With this, it is possible to access A from within B and B from within A.
+
+However, there are some rules concerning the access to and from the inner class. The code above will compile and work. But if you look closely, the method \textit{f()} from the class B can access member \textit{a} from class A eventhough \textit{a} is defined as private. So in fact, the inner class gets the privilege to act as if it is part of the outer class.
+
+We must notice though that there is a different story when you want to access the inner class. In the code above, A has a method \textit{f()} that access the member \textit{test} that is defined in B, via the pointer to B that was saved in A. This is because the member \textit{test} is defined as public. If we however define \textit{test} as protected or private, the compiler will notify us that this is not allowed.
+
+We can therefore conclude that an inner class gets the privilege to access everything from its outer class, even the private and protected members or methods. This is in contrast to how the outer class can access the inner class, in this case the standard access rules are applied.
 
 \subsubsection{Metaclasses}
 In Ruby, a class is also an object. Each class is an instance of the unique metaclass which is built in the language.
 
-\subsubsection{Non-subclassable}
-
 \subsubsection{Partial classes}
+A partial class is a class whose definition may be splitted into multiple pieces. These pieces can be within one source file or across multiple files. Ruby supports the notion of partial classes. With this, it is possible to extend existing classes with new methods or members. The class must not be user-defined, it can be for example the \textit{String} class: 
 
-\subsubsection{Uninstantiable classes}
+\begin{lstlisting}[language=Ruby]
+class String
+	def doublePrint
+		print self
+		print self
+	end
+end
+puts "test".doublePrint
+\end{lstlisting}
+
+This will give as a result: "\textit{testtest}".
+
+Partial classes like in Ruby do not exist in C++. It is not possible to add new methods or members on-the-fly. The reason for this is that Ruby classes are considered "open" while C++ classes are "closed". When you define a C++ class in the typical header-file, there is no possibility to split this definition in several files, e.g. multiple header files for the same class are not allowed. Only the definition of the methods themselves can be split over mutiple source-files. It is for example possible to have a header-file "a.h" and multiple source-files like "method1-from-a.cpp" and "method2-from-a.cpp". Still, this does not create pure open classes like in Ruby, it is merely a way to make smaller files.
 
 \subsection{Inheritance}
 In Ruby, a class can only inherit from a single other class. Some other languages like C++ support multiple inheritance, a feature that allows classes to inherit features from multiple classes.
@@ -132,6 +227,60 @@ Ruby mixin's.
 
 \subsection{Access control}
 
+\subsubsection{Access control on members}
+C++ offers three keywords that define access control on members and methods of classes: \textit{public}, \textit{protected} or \textit{private}. 
+
+\begin{itemize}
+\item \textit{public}: the member/method is accessible without any restriction
+\item \textit{protected}: only the class that defines the member/method, the friend classes of the class and the subclasses of the class can access the member/method
+\item \textit{private}: only the class that defines the member/method and the friend classes of the class can access the member/method
+\end{itemize}
+
+Ruby also provides these three keywords but there are some subtle differences. We will now explain one difference, the rest will be explained in the following section. The difference between Ruby and C++ can be found in the objects on which a private method is called. This C++ code compiles:
+
+\begin{lstlisting}
+class A {
+	private:
+		void foo() { return; }
+	public:
+		void test(A* a) {
+			foo();
+			this->foo();
+			a->foo();
+		}
+};
+ 
+int main()
+{
+   A* a = new A();
+   A* b = new A();
+   a->test(b);
+   return 0;
+}
+\end{lstlisting}
+
+As you can see, we have a class A in which the \textit{test()}-method accepts a parameter to an A object. All three calls to the method \textit{foo()} work: with an implicit receiver and an explicit receiver like \textit{this} or \textit{a}. If we try the Ruby equivalent of this code, we get into trouble:
+
+\begin{lstlisting}
+class A
+	private
+		def foo
+		end
+	public
+		def test(obj)
+			foo
+			self.foo
+			obj.foo
+		end
+end
+
+a = A.new
+b = A.new
+a.test(b)
+\end{lstlisting}
+
+Both the lines \textit{self.foo} and \textit{obj.foo} generate the same error \textit{NoMethodError}. This is because we use an explicit receiver. The implicit receiver in line 7 allows the call to \textit{foo}. In Ruby, it depends on the type of receiver that you use while this is not important in C++.
+
 \subsubsection{Derived classes}
 When declaring a derived class in C++, we can provide an access specifier: \textit{public}, \textit{protected} or \textit{private}. For example if we have the base class A, we can create subclass B from A and provide one of the three access specifiers like this:
 
@@ -167,7 +316,7 @@ When compiling and excecuting this code, the program will output correctly:
 Value foo: 3
 \end{lstlisting}
 
-If we however change the line access keyword when defining the class B to for example \textit{protected} or \textit{private} (instead of the current \textit{public}), we get a compilation error: 
+If we however change the line access keyword when defining the class B to for example \textit{protected} or \textit{private} (instead of the current \textit{public}), we get a compilation error eventhough everything in A was originally defined as \textit{public}: 
 
 \begin{lstlisting}
 g++ a.cpp -o a
@@ -179,25 +328,140 @@ a.cpp:15:40: error: within this context
 make: *** [a] Error 1
 \end{lstlisting}
 
-When deriving a class, the following situations can occur:
+When deriving a class in C++, the following situations can occur:
 \begin{itemize}
 \item Derive as \textit{public}: public and protected members of the base class remain public and protected members of the derived class.
 \item Derive as \textit{protected}: public and protected members of the base class become protected members of the derived class.
 \item Derive as \textit{private}: public and protected members of the base class become private members of the derived class.
 \end{itemize}
-In all cases, private members of the base class remain private, e.g.: not even the derived class can access them unless there is a specific friend declaration within the base class that explicitly grants access to them.
+In all cases, private members of the base class remain private, e.g.: not even the derived class can access them unless there is a specific friend declaration within the base class that explicitly grants access to them. If we do not provide an access specifier, the access rules of the baseclass are simply copied, e.g.: public remains public, protected remains protected and private remains private.
+
+Unlike C++, Ruby does not support the changing of the access properties of members and methods of the superclass via one keyword (when we derive a class). However, Ruby has the strange property to allow the call to private methods and members from the superclass via the subclass. An example:
+
+\begin{lstlisting}[language=Ruby]
+class Animal
+	private
+	def speak
+		puts "Random noise"
+	end
+end
+
+class Cat < Animal
+	public
+	def speak
+		super
+	end
+end
+\end{lstlisting}
+
+When we excecute the following code:
+
+\begin{lstlisting}[language=Ruby]
+cat = Cat.new
+cat.speak
+\end{lstlisting}
+
+This will print \textit{Random noise}. The explanation behind this is that Ruby actually allows to call private methods and members from a class via an implicit receiver. If you use an explicit receiver (for example \textit{Animal.speak}) the call will fail like you would expect. So although Ruby does not have an access specifier when deriving a class, it is however possible to mimic the behaviour from C++, even with more detail as you can control the access specifiers for all methods separatly. Only thing you have to do is rewrite the methods where you want some other access control and call the original method.
 
 \subsection{The use of super and this/self}
 
 \subsection{Polymorphism}
+The literal meaning of polymorphism is "the ability to take on multiple forms or shapes". This refers, in a broader sense, to the ability of different objects to respond in different ways to the same message or method invocation. We have written an example in Ruby that shows what polymorphism can do:
+
+\begin{lstlisting}[language=Ruby]
+class Animal
+	def makeNoise
+		throw NotImplementedError.new("makeNoise() not implemented")
+	end
+end
+
+class Dog < Animal
+	def makeNoise
+		puts "Woof!"
+	end
+end
+
+class Cat < Animal
+	def makeNoise
+		puts "Meow!"
+	end
+end
+
+[Dog, Cat, Animal].each do |obj|
+	a = obj.new
+	a.makeNoise
+end
+\end{lstlisting}
+
+In this example, we see that the classes Dog and Cat are subclasses from Animal. We dynamically create a Dog and Cat object and call the method \textit{makeNoise}. The output is correctly:
+
+\begin{lstlisting}[language=Ruby]
+Woof!
+Meow!
+\end{lstlisting}
+
+Even though Cat and Dog are different classes, they implement the same messages with a different implementation but can be called in exactly the same way. Via the implementation of \textit{makeNoise} in the class Animal, we make sure that there will be a clean error when someone has subclassed Animal but not overwritten \textit{makeNoise}; thus ensuring that all the subclasses of Animal understand the same message \textit{makeNoise} but with their own implementation. An equivalent example in C++ code:
+
+\begin{lstlisting}
+#include <iostream>
+
+class Animal {
+	public:
+		virtual void makeNoise() = 0;
+};
+
+class Dog: public Animal {
+	public:
+		void makeNoise() {
+			std::cout << "Woof!" << std::endl;
+		}
+};
+
+class Cat: public Animal {
+	public:
+		void makeNoise() {
+			std::cout << "Meow!" << std::endl;
+		}
+};
+ 
+int main()
+{
+   Animal* a = new Dog();
+   a->makeNoise();
+   Animal* b = new Cat();
+   b->makeNoise();
+   return 0;
+}
+\end{lstlisting}
+
+This correctly outputs: 
+
+\begin{lstlisting}[language=Ruby]
+Woof!
+Meow!
+\end{lstlisting}
+
+As you can see, we treat the objects Dog and Cat like they were Animal objects. We call the same method \textit{makeNoise()} which results in different results, e.g.: the same message results in a different execution.
 
 \subsection{Interfaces}
+
+http://www.metabates.com/2011/02/07/building-interfaces-and-abstract-classes-in-ruby/
 
 \subsection{Reflection}
 
 \subsection{Clonable objects}
 
 \subsection{Everything is an object?}
+
+One of the main features of Ruby is the fact that everything is an object, even primitive types like an integer. Ruby follows the influence of the Smalltalk language by giving methods and instance variables to all of its types. An example of this feature:
+
+\begin{lstlisting}[language=Ruby]
+5.times { print "test".length }
+\end{lstlisting}
+
+This will generate the output: \textit{44444}. What it does is take an object \textit{5} of the type Number, call the method \textit{times} on it so it excecutes five times the part between \texit{\{ and \}}. The code \textit{print "test".length} will be excecuted five times which is effectively printing the length of the String object "test".
+
+In C++, not everything acts as an object. The primitive data types: \textit{char}, \textit{short}, \textit{int}, \textit{long}, \textit{bool}, \textit{float}, \textit{double}, \textit{long double} and \textit{whar\_t} ; do not have a class that provides methods to call on the data types. The data type \textit{string} is an exception to this as it does have it's own class that can be used when including the library \textit{string}.
 
 \section{Conclusion}
 
@@ -212,5 +476,12 @@ http://www.klankboomklang.com/2007/10/12/objects-classes-and-jruby-internals/
 http://shiningthrough.co.uk/A-comparison-of-Ruby-pass-by-reference-and-C++-pass-by-reference
 http://rubylearning.com/satishtalim/ruby_inheritance.html
 http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=\%2Fcom.ibm.xlcpp8l.doc\%2Flanguage\%2Fref\%2Fcplr130.htm
+http://www.skorks.com/2010/04/ruby-access-control-are-private-and-protected-methods-only-a-guideline/
+http://weblog.jamisbuck.org/2007/2/23/method-visibility-in-ruby
+http://stackoverflow.com/questions/137661/how-do-you-do-polymorphism-in-ruby
+http://www.cplusplus.com/doc/tutorial/variables/
+http://www.brpreiss.com/books/opus8/html/page597.html
+http://www.java2s.com/Code/Ruby/Class/classvariablevsobjectvariable.htm
+http://cplusplus.co.il/2009/09/01/final-frozen-classes-in-cpp/
 
 \end{document}

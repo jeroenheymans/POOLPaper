@@ -1,12 +1,18 @@
 #include <iostream>
 
 class A {
+	const int a = 1;
 	public:
-		virtual void f() = 0;
+		class B {
+			public:
+				void print() {
+					std::cout << a << std::endl;
+				}
+		};
 };
  
 int main()
 {
-   // A a = new A();
+   A* a = new A();
    return 0;
 }
