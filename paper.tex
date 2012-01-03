@@ -23,6 +23,10 @@ tabsize=2}
 \begin{document}
 \maketitle
 
+\tableofcontents
+
+\columnbreak
+
 \section{Introduction}
 
 \subsection{Foreword}
@@ -40,6 +44,7 @@ The creator of Ruby, Ykihiro Matsumoto, looked at other languages to find an ide
 \subsection{What follows next}
 We will compare several important features that belong to object-oriented languages like inheritance, polymorphism, access control and many more.
 
+\pagebreak
 \section{Comparisons}
 
 \subsection{Classes}
@@ -96,6 +101,25 @@ As long as there is no class that extends A, the methods in A will never be acce
 
 \subsubsection{Final classes}
 Final classes are not supported in C++ nor Ruby however there exist mechanisms to prevent programmers from extending other classes. Note: is a Ruby class really final as it is open?
+
+\subsubsection{Friend classes}
+C++ has an unique keyword: \textit{friend}. With this, one can declare a class as a friend:
+
+\begin{lstlisting}
+class A;
+class B {
+	friend class A;
+}
+\end{lstlisting}
+
+In this example, class A is a friend of B. This means that class A has more access rights to the members and methods of class B. More concrete, this means that all private and protected members and methods of B are accessible by A while this would not be the case by default. The \textit{friend} keyword defines the following features:
+
+\begin{itemize}
+\item Friendships are not corresponded: if class A is a friend of class B, class B is not automatically a friend of class A.
+\item Friendships are not transitive: if class A is a friend of class B and class B is a friend of class C, then is class A not a friend of class C.
+\item Friendships are not inherited: if there is a class Base with a friend, then the class Derived (that inherits from Base) does not have that same friend. The same goes up for all friends of Derived, they are not automatically friends of Base. The same goes in the other direction: if Base (or Derived) is a friend of a class, then is Derived (or Base) not automatically a friend of the same class.
+\item The restricted members and methods from Base that are inherited by Derived are accessible by a friend class of Derived if Derived itself can access these members and methods. So if Derived inherits publicly from Base, Derived only has access to the protected and public members from Base, not the private members, so neither does a friend (the same goes for methods).
+\end{itemize}
 
 \subsubsection{Inner classes}
 Inner classes are called nested classes in Ruby. They can simply be defined like you would expect:
@@ -221,9 +245,49 @@ This will output:
 Random noise
 Breathe
 \end{lstlisting}
-Inheritance in C++ is more advanced as it supports multiple inheritance.
 
-Ruby mixin's.
+C++ supports multiple inheritance, with this it is possible to inherit from multiple classes like this:
+
+\begin{lstlisting}
+class C: public A, protected B { };
+\end{lstlisting}
+
+In this example, a class C is created that inherits publicly from class A and protectedly from class B. As you can see, the access modifiers can be different. One of the common pitfalls when using multiple inheritance in C++ is ambiguities:
+
+\begin{lstlisting}
+class A { virtual void f(); };
+class B { virtual void f(); };
+class C : public A ,public B { void f(); };
+\end{lstlisting}
+
+This issue can be solved by using explicit qualification. We explicitly tell the compiler which \textit{f()} we would like to call:
+
+\begin{lstlisting}
+C* c = new C;
+c->f();
+c->A::f(); // call f() from class A
+c->B::f(); // call f() from class B
+\end{lstlisting}
+
+Another more complex problem which can arise with multiple inheritance is called the \textit{diamond problem}. The diamond problem is an ambiguity that arises when two classes B and C inherit from A, and class D inherits from both B and C. If a method in D calls a method that is defined in A (and D does not override the method) and B and C have overridden that method differently, then from which class does it inherit: B or C? This is a problem that can be solved by using virtual inheritance.
+
+When constructing an object of class D, C++ actually creates in the memory objects of B and C internally. B and C in their turn also construct each an object of A. This means that upon the creation of D, 4 internal objects are created: B, C and 2 times A. If we however have inherited B and C from A as virtual (for example: \textit{class B: virtual public A}), C++ will make sure that only one object of A is constructed.
+
+Although Ruby does not support multiple inheritance, it eliminates the need for multiple inheritance by providing mixins. As a programmer, you can define modules in Ruby. In classes, you can then include these modules. For example:
+
+\begin{lstlisting}[language=Ruby]
+module Foo
+	def Bar
+		puts "Wazaa!"
+	end
+end
+
+class FooBar
+	include Foo
+end
+\end{lstlisting}
+
+In this example, the class FooBar contains the content of module Foo (in this case the method Bar). It is possible to include multiple modules.
 
 \subsection{Access control}
 
@@ -362,8 +426,6 @@ cat.speak
 \end{lstlisting}
 
 This will print \textit{Random noise}. The explanation behind this is that Ruby actually allows to call private methods and members from a class via an implicit receiver. If you use an explicit receiver (for example \textit{Animal.speak}) the call will fail like you would expect. So although Ruby does not have an access specifier when deriving a class, it is however possible to mimic the behaviour from C++, even with more detail as you can control the access specifiers for all methods separatly. Only thing you have to do is rewrite the methods where you want some other access control and call the original method.
-
-\subsection{The use of super and this/self}
 
 \subsection{Polymorphism}
 The literal meaning of polymorphism is "the ability to take on multiple forms or shapes". This refers, in a broader sense, to the ability of different objects to respond in different ways to the same message or method invocation. We have written an example in Ruby that shows what polymorphism can do:
