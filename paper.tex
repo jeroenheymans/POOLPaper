@@ -17,6 +17,9 @@ numberstyle=\scriptsize\color{gray},
 breaklines=true,
 numbersep=1pt,
 tabsize=2}
+\newenvironment{quoteje} 
+               { \noindent {\bfseries  "}}     
+               {{\bfseries  "}\vspace{\parskip}}
 \renewcommand\refname{References}
 \author{Jeroen Heymans}
 \title{Comparison of two object-oriented languages: C++ and Ruby}
@@ -30,22 +33,33 @@ tabsize=2}
 \section{Introduction}
 
 \subsection{Foreword}
-This paper is written for the master course Principles of Object Oriented Languages on the VUB. It contains a comparison of several features from two languages that contain object-oriented features. 
+This paper is written for the master course Principles of Object Oriented Languages on the Vrije Universiteit Brussel. It contains a comparison of the object-oriented features from two languages that contain multiple object-oriented features. 
 
 \subsection{The compared languages}
-The choice for this paper was C++, a well-known static typed language with good object oriented features, and Ruby, a dynamic typed language that was designed to be as object-oriented as possible.
+The choice for this paper was C++, a well-known static typed language with good object-oriented features, and Ruby, a dynamic typed language that was designed to be as object-oriented as possible.
 
 \subsubsection{C++}
-Originally called "C with classes", C++ is a multi-paradigm language based on the popular language C. C++ doesn't require you to write all code in an object-oriented fashion, it is also possible to write all your code in functions. We have tested all the C++ code in this paper with the GCC compiler (version 4.5.2).
+Originally called "C with classes", C++ is a multi-paradigm, static typed language based on the popular language C. C++ does not require you to write all code in an object-oriented fashion though, it is also possible to write all your code in a procedural way via functions. As a multi-paradigm language, it supports however many object-oriented features. We have tested all the C++ code in this paper with the GCC compiler on Ubuntu (version 4.5.2).
 
 \subsubsection{Ruby}
-The creator of Ruby, Ykihiro Matsumoto, looked at other languages to find an ideal syntax. He watned a scripting language that was more powerful than Perl and more object-oriented than Python. In Ruby, everything is an object. It was influenced by Smalltalk, every type was given methods instance variables. All Ruby code was tested with Ruby version 1.9.2p0 (2010-08-18 revision 29036).
+When designing Ruby, the creator of Ruby, Ykihiro Matsumoto, looked at other languages to find an ideal syntax. He wanted a dynamic typed scripting language that was more powerful than Perl and more object-oriented than Python. In Ruby, everything is an object. It was influenced by Smalltalk, every type was given method instance variables. All Ruby code was tested with Ruby version 1.9.2p0 (2010-08-18 revision 29036).
 
 \subsection{What follows next}
 We will compare several important features that belong to object-oriented languages like inheritance, polymorphism, access control and many more.
 
 \pagebreak
 \section{Comparisons}
+
+\subsection{Dynamic versus static typing}
+C++ is a static typed language while Ruby is a dynamic typed language. Ruby supports duck typing which is a credited to James Whitcomb Riley's words:
+
+\begin{quote}When I see a bird that walks like a duck and swims like a duck and quacks like a duck, I call that bird a duck.\end{quote}
+
+The type of a variable or object is determined at runtime.
+
+Because of the difference in typing, there are some differences in Ruby and C++. For example, in C++ we can have multiple functions or methods with the same number of parameters but with other types. \textit{void foo(int)} and \textit{void foo(float)} are both different functions. In Ruby, this is not possible, only one function or method is allowed with the same name.
+
+Due to the dynamic typed nature of Ruby, there is no need for constructions like templates in C++ to enforce one function or method to accept multiple types.
 
 \subsection{Classes}
 In object-oriented programming, a class is a blueprint that is used to construct objects which we call object instances. We compare the several types of classes that can be made in Ruby and C++.
@@ -60,7 +74,7 @@ class A {
 };
 \end{lstlisting}
 
-If we are trying to compile C++ code where we have instantiated this abstract class, for example like this:
+If we are trying to compile C++ code where instantiate this abstract class, for example like this:
 
 \begin{lstlisting}
 int main() {
@@ -82,7 +96,7 @@ a.cpp:3:9: note: since type 'A' has pure virtual functions
 make: *** [a] Error 1
 \end{lstlisting}
 
-Abstract classes in Ruby are a different story. Unlike some object-oriented languages, Ruby does not support a keyword like "abstract" or a way like C++ to define an abstract class. Actually, Ruby does not provide the necessary tools to create abstract classes. However, the programmer himself can force a class to behave like an abstract class when he makes \textit{:new} (the constructor) private. The extending class must then make \textit{:new} public:
+Abstract classes in Ruby are a different story. Unlike some object-oriented languages, Ruby does not support a keyword like \textit{abstract} or a way like C++ to define an abstract class. Actually, Ruby does not provide the necessary tools to create abstract classes. However, the programmer himself can force a class to behave like an abstract class when he makes \textit{:new} (the constructor) private. The extending class must then make \textit{:new} public:
 
 \begin{lstlisting}[language=Ruby]
 class A
@@ -97,10 +111,54 @@ class B < A
 end
 \end{lstlisting}
 
-As long as there is no class that extends A, the methods in A will never be accesible.
+As long as there is no class that extends A, the methods in A will never be accesible as it is not possible to construct an instance of A.
 
 \subsubsection{Final classes}
-Final classes are not supported in C++ nor Ruby however there exist mechanisms to prevent programmers from extending other classes. Note: is a Ruby class really final as it is open?
+A final class is a class that can not be extended. This could be done for reasons of security and efficiency. Final classes are not supported in C++ nor Ruby however there exist mechanisms to prevent programmers from extending other classes. An example of such a mechanism in C++:
+
+\begin{lstlisting}
+class Final;
+ 
+class MakeFinal {
+	private:
+    	MakeFinal() { }
+    friend class Final;
+};
+ 
+class Final : virtual MakeFinal {
+	public:
+		Final() { }
+};
+
+class Derived : public Final { };
+\end{lstlisting}
+
+In this example, we made the class named Final final. We did this by inheriting class Final from the class MakeFinal. In class MakeFinal, we have a private constructor which can only be called by the class Final as the class Final is marked as \textit{friend}. By inheriting MakeFinal \textit{virtual} in the class Final, we make sure that the constructor \textit{MakeFinal()} must be called if we derive the class Final. As only Final is a friend, this will generate a compile error that notifies us that \textit{MakeFinal()} is private.
+
+In Ruby, we can create a similar mechanism:
+
+\begin{lstlisting}
+class Class
+   def final(klass)
+      class << klass
+         def inherited(subclass)
+            raise RuntimeError, "Illegal attempt to subclass #{self} with #{subclass}"
+         end
+      end
+   end
+end
+
+class Foo
+   final(self)
+end
+
+class Bar < Foo
+end
+\end{lstlisting}
+
+In this example, we add a method \textit{final} to the standardclass \textit{Class}. In this method \textit{final}, we define that a new method called \textit{inherited} should be added to the class given by the parameter \textit{klass}. \textit{inherited} is a method that will always be called whenever we try to inherit the class that contains this method. In our example, this will cause a \textit{RuntimeError}, thus disallowing the programmer to continue programming as long as we try to inherit our \textit{final} class.
+
+But is a class really final in Ruby if we force a class to be final like we did in C++? Unfortunately no. This is due to the \textit{open classes} concept of Ruby that will always allow you to add methods to a class, whether it is marked as \textit{final} like in our example or not.\footnote{See the section "Partial classes" however for an example on how to prevent extending an open class}
 
 \subsubsection{Friend classes}
 C++ has an unique keyword: \textit{friend}. With this, one can declare a class as a friend:
@@ -118,7 +176,9 @@ In this example, class A is a friend of B. This means that class A has more acce
 \item Friendships are not corresponded: if class A is a friend of class B, class B is not automatically a friend of class A.
 \item Friendships are not transitive: if class A is a friend of class B and class B is a friend of class C, then is class A not a friend of class C.
 \item Friendships are not inherited: if there is a class Base with a friend, then the class Derived (that inherits from Base) does not have that same friend. The same goes up for all friends of Derived, they are not automatically friends of Base. The same goes in the other direction: if Base (or Derived) is a friend of a class, then is Derived (or Base) not automatically a friend of the same class.
-\item The restricted members and methods from Base that are inherited by Derived are accessible by a friend class of Derived if Derived itself can access these members and methods. So if Derived inherits publicly from Base, Derived only has access to the protected and public members from Base, not the private members, so neither does a friend (the same goes for methods).
+\item The restricted members and methods from Base that are inherited by Derived are accessible by a friend class of Derived if Derived itself can access these members and methods. So if Derived inherits publicly\footnote{See the section "Derived classes" in "Access control" for more details on deriving classes.} from Base, Derived only has access to the protected and public members from Base, not the private members, so neither does a friend (the same goes for methods).
+
+Friend classes are not possible in standard Ruby, however there exist some libraries\footnote{An example can be found on https://github.com/lsegal/friend} that allow a programmer to define friend classes in Ruby.
 \end{itemize}
 
 \subsubsection{Inner classes}
@@ -152,7 +212,7 @@ b = A::B.new
 a = A.new
 \end{lstlisting}
 
-With the \textit{::} operator in \textit{A::B}, we simply say: "Take class B that is defined inside the scope of A". The object of class B can be treated like it was never defined in A. Both access can exist completely on their own, if you make an instance of A, this will not indirectly create an instance of B and vice-versa. This means that an instance of B will not have access to the methods and members of A, only to the methods and members of its own instance. The same goes for an instance of A. Only if there is an explicit construction of an object B or A in respectively A or B, they will be able to access the methods and members.
+With the \textit{::} operator in \textit{A::B}, we simply say: "Take class B that is defined inside the scope of A". The object of class B can be treated like it was never defined in A. Both instances of the classes can exist completely on their own: if you make an instance of A, this will not indirectly create an instance of B and vice-versa. This means that an instance of B will not have access to the methods and members of A, only to the methods and members of its own instance. The same goes for an instance of A. Only if there is an explicit construction of an object B or A in respectively A or B, they will be able to access the methods and members.
 
 With inner classes in C++, almost the same story exists. In order to access data from the inner class via the outer class or from the outer class via the inner class, an instance must be present to access this data. This can be achieved when constructing the inner or outer class:
 
@@ -188,19 +248,25 @@ int main()
 }
 \end{lstlisting}
 
-Let us explain the code. What we have here are two classes: A as an outer class and B as an inner class. Upon construction of A, we automatically call the constructor of B with an instance of A. With this, B has a pointer that points to the object of A. A itself remembers the pointer to B that has been constructed. With this, it is possible to access A from within B and B from within A.
+Let us explain the code. What we have here are two classes: A as an outer class and B as an inner class. Upon construction of A, we automatically call the constructor of B with an instance of A. With this, B has a pointer that points to the object of A. A itself remembers the pointer to B that has been constructed. With this, it is possible to access A from within B and B from within A. Similar code can be written for Ruby where we also construct an instance of class A in class B and vice-versa.
 
-However, there are some rules concerning the access to and from the inner class. The code above will compile and work. But if you look closely, the method \textit{f()} from the class B can access member \textit{a} from class A eventhough \textit{a} is defined as private. So in fact, the inner class gets the privilege to act as if it is part of the outer class.
+However, there are some rules concerning the access to and from the inner class in C++. The code above will compile and work. But if you look closely, the method \textit{f()} from the class B can access member \textit{a} from class A eventhough \textit{a} is defined as private. So in fact, the inner class gets the privilege to act as if it is part of the outer class.
 
 We must notice though that there is a different story when you want to access the inner class. In the code above, A has a method \textit{f()} that access the member \textit{test} that is defined in B, via the pointer to B that was saved in A. This is because the member \textit{test} is defined as public. If we however define \textit{test} as protected or private, the compiler will notify us that this is not allowed.
 
-We can therefore conclude that an inner class gets the privilege to access everything from its outer class, even the private and protected members or methods. This is in contrast to how the outer class can access the inner class, in this case the standard access rules are applied.
+We can therefore conclude that an inner class in C++ gets the privilege to access everything from its outer class, even the private and protected members or methods. This is in contrast to how the outer class can access the inner class, in this case the standard access rules are applied. In Ruby, there are no special access rights for inner and outer classes, the standard rules are applied as enforced by the access specifiers \textit{public}, \textit{protected} and \textit{private}.
 
 \subsubsection{Metaclasses}
-In Ruby, a class is also an object. Each class is an instance of the unique metaclass which is built in the language.
+For every defined class in Ruby, there exists a metaclass. For example if we define a class Person, Ruby automatically creates a metaclass MetaPerson\footnote{Internally a class for X will not be called MetaX but we want to make it more readable.}. The role of the metaclass MetaPerson is to split behaviour between Class (to create new classes) and class specific behaviour.
+
+Ruby has two different types of methods: class methods and instance methods. Class methods are not designed to work on a specific instance of the class while instance methods are specifically designed to work on an instance of the class. Class methods are often compared to what we call static methods in other languages while instance methods can be compared to normal methods in other languages. The class methods are saved in the metaclass of the class. The class methods of Person are in fact instance methods of MetaPerson.
+
+The same goes up for class variables and instance variables. Class variables are comparable to static variables in other languages: they are not instance-specific while instance variables are instance-specific. The class variables of Person are in fact instance variables of MetaPerson.
+
+C++ does not have built-in support for metaclasses. However, it is possible to mimic the behaviour of meta-classes. This would mean however for example that you manage a metaclass yourself where the metaclass is a singleton class.
 
 \subsubsection{Partial classes}
-A partial class is a class whose definition may be splitted into multiple pieces. These pieces can be within one source file or across multiple files. Ruby supports the notion of partial classes. With this, it is possible to extend existing classes with new methods or members. The class must not be user-defined, it can be for example the \textit{String} class: 
+A partial class is a class whose definition may be splitted into multiple pieces. These pieces can be within one source file or across multiple files. Ruby supports the notion of partial classes. With this, it is possible to extend existing classes with new methods or members. The class must not be user-defined, it can be for example the built-in \textit{String} class: 
 
 \begin{lstlisting}[language=Ruby]
 class String
@@ -214,80 +280,9 @@ puts "test".doublePrint
 
 This will give as a result: "\textit{testtest}".
 
-Partial classes like in Ruby do not exist in C++. It is not possible to add new methods or members on-the-fly. The reason for this is that Ruby classes are considered "open" while C++ classes are "closed". When you define a C++ class in the typical header-file, there is no possibility to split this definition in several files, e.g. multiple header files for the same class are not allowed. Only the definition of the methods themselves can be split over mutiple source-files. It is for example possible to have a header-file "a.h" and multiple source-files like "method1-from-a.cpp" and "method2-from-a.cpp". Still, this does not create pure open classes like in Ruby, it is merely a way to make smaller files.
+Partial classes like in Ruby do not exist in C++. It is not possible to add new methods or members on-the-fly. The reason for this is that Ruby classes are considered "open" while C++ classes are "closed". When you define a C++ class in the typical header-file, there is no possibility to split this definition in several files, e.g. multiple header files for the same class are not allowed. Only the definition of the methods themselves can be split over mutiple source-files. It is for example possible to have a header-file "a.h" and multiple source-files like "method1-from-a.cpp" and "method2-from-a.cpp". Still, this does not create pure open classes like in Ruby where you can add methods at runtime, it is merely a way to make smaller files.
 
-\subsection{Inheritance}
-In Ruby, a class can only inherit from a single other class. Some other languages like C++ support multiple inheritance, a feature that allows classes to inherit features from multiple classes.
-\begin{lstlisting}[language=Ruby]
-class Animal
-	def breath
-		puts "Breathe"
-	end
-	def speak
-		puts "Random noise"
-	end
-end
-
-class Cat < Animal
-	def speak
-		puts "Meow"
-	end
-end
-\end{lstlisting}
-When using these two classes, one can see that methods will be overriden:
-\begin{lstlisting}[language=Ruby]
-cat = Cat.new
-cat.speak
-cat.breath
-\end{lstlisting}
-This will output:
-\begin{lstlisting}
-Random noise
-Breathe
-\end{lstlisting}
-
-C++ supports multiple inheritance, with this it is possible to inherit from multiple classes like this:
-
-\begin{lstlisting}
-class C: public A, protected B { };
-\end{lstlisting}
-
-In this example, a class C is created that inherits publicly from class A and protectedly from class B. As you can see, the access modifiers can be different. One of the common pitfalls when using multiple inheritance in C++ is ambiguities:
-
-\begin{lstlisting}
-class A { virtual void f(); };
-class B { virtual void f(); };
-class C : public A ,public B { void f(); };
-\end{lstlisting}
-
-This issue can be solved by using explicit qualification. We explicitly tell the compiler which \textit{f()} we would like to call:
-
-\begin{lstlisting}
-C* c = new C;
-c->f();
-c->A::f(); // call f() from class A
-c->B::f(); // call f() from class B
-\end{lstlisting}
-
-Another more complex problem which can arise with multiple inheritance is called the \textit{diamond problem}. The diamond problem is an ambiguity that arises when two classes B and C inherit from A, and class D inherits from both B and C. If a method in D calls a method that is defined in A (and D does not override the method) and B and C have overridden that method differently, then from which class does it inherit: B or C? This is a problem that can be solved by using virtual inheritance.
-
-When constructing an object of class D, C++ actually creates in the memory objects of B and C internally. B and C in their turn also construct each an object of A. This means that upon the creation of D, 4 internal objects are created: B, C and 2 times A. If we however have inherited B and C from A as virtual (for example: \textit{class B: virtual public A}), C++ will make sure that only one object of A is constructed.
-
-Although Ruby does not support multiple inheritance, it eliminates the need for multiple inheritance by providing mixins. As a programmer, you can define modules in Ruby. In classes, you can then include these modules. For example:
-
-\begin{lstlisting}[language=Ruby]
-module Foo
-	def Bar
-		puts "Wazaa!"
-	end
-end
-
-class FooBar
-	include Foo
-end
-\end{lstlisting}
-
-In this example, the class FooBar contains the content of module Foo (in this case the method Bar). It is possible to include multiple modules.
+If you do not want that classes are further extended in Ruby, then the possibility of \textit{freezing} the class exists. By simple adding the keyword \textit{freeze} to the class, you declare the class as frozen (e.g. not modifiable).
 
 \subsection{Access control}
 
@@ -427,6 +422,107 @@ cat.speak
 
 This will print \textit{Random noise}. The explanation behind this is that Ruby actually allows to call private methods and members from a class via an implicit receiver. If you use an explicit receiver (for example \textit{Animal.speak}) the call will fail like you would expect. So although Ruby does not have an access specifier when deriving a class, it is however possible to mimic the behaviour from C++, even with more detail as you can control the access specifiers for all methods separatly. Only thing you have to do is rewrite the methods where you want some other access control and call the original method.
 
+\subsection{Inheritance}
+In Ruby, a class can only inherit from a single other class. Some other languages like C++ support multiple inheritance, a feature that allows classes to inherit features from multiple classes.
+\begin{lstlisting}[language=Ruby]
+class Animal
+	def breath
+		puts "Breathe"
+	end
+	def speak
+		puts "Random noise"
+	end
+end
+
+class Cat < Animal
+	def speak
+		puts "Meow"
+	end
+end
+\end{lstlisting}
+When using these two classes, one can see that methods will be overriden:
+\begin{lstlisting}[language=Ruby]
+cat = Cat.new
+cat.speak
+cat.breath
+\end{lstlisting}
+This will output:
+\begin{lstlisting}
+Random noise
+Breathe
+\end{lstlisting}
+
+C++ supports multiple inheritance. With multiple inheritance it is possible to inherit from multiple classes like this:
+
+\begin{lstlisting}
+class C: public A, protected B { };
+\end{lstlisting}
+
+In this example, a class C is created that inherits publicly from class A and protectedly from class B. As you can see, the access modifiers can be different. 
+
+One of the common pitfalls when using multiple inheritance in C++ is ambiguities:
+
+\begin{lstlisting}
+class A { virtual void f(); };
+class B { virtual void f(); };
+class C : public A ,public B { void f(); };
+\end{lstlisting}
+
+This issue can be solved by using explicit qualification. We explicitly tell the compiler which \textit{f()} we would like to call:
+
+\begin{lstlisting}
+C* c = new C;
+c->f();
+c->A::f(); // call f() from class A
+c->B::f(); // call f() from class B
+\end{lstlisting}
+
+Because of multiple inheritance, C++ does not support the keyword \textit{super} which makes it possible to call methods and retrieve members from the superclass. If you inherit from class A and class B, to which class should \textit{super} point? To avoid confusion and get clear code, one always has to use explicit qualification when calling the superclass.
+
+Another more complex problem which can arise with multiple inheritance is called the \textit{diamond problem}. The diamond problem is an ambiguity that arises when two classes B and C inherit from A, and class D inherits from both B and C. If a method in D calls a method that is defined in A (and D does not override the method) and B and C have overridden that method differently, then from which class does it inherit: B or C? This is a problem that can be solved by using virtual inheritance.
+
+When constructing an object of class D, C++ actually creates in the memory objects of B and C internally. B and C in their turn also construct each an object of A. This means that upon the creation of D, 4 internal objects are created: B, C and 2 times A. If we however have inherited B and C from A as virtual (for example: \textit{class B: virtual public A}), C++ will make sure that only one object of A is constructed.
+
+Although Ruby does not support multiple inheritance, it eliminates the need for multiple inheritance by providing mixins. As a programmer, you can define modules in Ruby. In classes, you can then include these modules. For example:
+
+\begin{lstlisting}[language=Ruby]
+module Foo
+	def Bar
+		puts "Wazaa!"
+	end
+end
+
+class FooBar
+	include Foo
+end
+\end{lstlisting}
+
+In this example, the class FooBar contains the content of module Foo (in this case the method Bar). It is possible to include multiple modules, even if the modules contain the same methods:
+
+\begin{lstlisting}[language=Ruby]
+module A
+	def foo
+		puts "Module A"
+	end
+end
+
+module B
+	def foo
+		puts "Module B"
+	end
+end
+
+class C
+	include A
+	include B
+end
+
+c = C.new
+c.foo
+\end{lstlisting}
+
+This will output \textit{Module B}. The order in which a programmer includes modules, depends on what methods will be available. If we would have included A after B, the output would be \textit{Module A}. As modules are included, they override functionality that was defined in the lines before the include. Methods that are defined after the include statement, will override methods that were included.
+
 \subsection{Polymorphism}
 The literal meaning of polymorphism is "the ability to take on multiple forms or shapes". This refers, in a broader sense, to the ability of different objects to respond in different ways to the same message or method invocation. We have written an example in Ruby that shows what polymorphism can do:
 
@@ -505,13 +601,35 @@ Meow!
 
 As you can see, we treat the objects Dog and Cat like they were Animal objects. We call the same method \textit{makeNoise()} which results in different results, e.g.: the same message results in a different execution.
 
-\subsection{Interfaces}
+\subsection{Namespaces/modules}
+Namespaces in C++ are way to group classes, functions and other identifiers in one block. Outside this block, one must prefix the identifiers he wants to access with the namespace specifier. To ommit the prefixing, one can use the following statement:
 
-http://www.metabates.com/2011/02/07/building-interfaces-and-abstract-classes-in-ruby/
+\begin{lstlisting}
+using namespace abc;
+\end{lstlisting}
+
+With this line, it is no longer necessary to prefix with \textit{abc::}. Namespaces are hierarchical, there can be mutiple namespaces defined in another namespace. When requesting an identifier, the compiler start searching from the namespace where the identifier is requested. For example if we request C in A::B, the compiler will first search if there exists a C in A::B. If not, the compiler searches in A and after that in the global namespace.
+
+Modules are the Ruby equivalent of namespaces. They can also be defined hierarchical. The difference with C++ namespaces is that modules can be included in classes. This allows programmers to add new methods to classes. If several classes implement exact the same method, this method can be placed in a module to ensure that every class has the same code. This concept is called mixins which is an alternative in Ruby to multiple inheritance in C++. 
 
 \subsection{Reflection}
+In standard C++, reflection is not possible. The popular framework Qt has however implemented reflection features\footnote{A class that is important to have reflection in Qt is for example QMetaObject: http://doc.qt.nokia.com/5.0-snapshot/qmetaobject.html}.
 
-\subsection{Clonable objects}
+Reflection is possible in Ruby. Via several standard methods, we get lots of possiblities in Ruby to perform reflection-related operations:
+
+\begin{itemize}
+\item Instance variables: setting, getting and removing
+\item Class variables: setting, getting and removing
+\item Methods: define, undefine, alias
+\end{itemize}
+
+Define, undefine and alias of methods can be done on instance methods and class methods. To perform these operations on instance methods, we must work on an instance of a class. If we want to perform these operations on class methods, we must work on the metaclass.
+
+\subsection{Interfaces}
+
+Both C++ and Ruby do not support a keyword like \textit{interface}. It is however possible to enforce interfaces in these languages. In C++ this is done very easily: create an abstract class that only consists of virtual functions without a body. This enforces inherited classes to implement all the methods. If this is not done, the inherited classes will be abstract classes.
+
+Via several modules, one can enforce interfaces in Ruby\footnote{An example of an implementation of interfaces can be found on http://www.metabates.com/2011/02/07/building-interfaces-and-abstract-classes-in-ruby/}. Generally, it is the same story as with abstract classes but you enforce the programmer to override all the methods of a class.
 
 \subsection{Everything is an object?}
 
@@ -526,6 +644,11 @@ This will generate the output: \textit{44444}. What it does is take an object \t
 In C++, not everything acts as an object. The primitive data types: \textit{char}, \textit{short}, \textit{int}, \textit{long}, \textit{bool}, \textit{float}, \textit{double}, \textit{long double} and \textit{whar\_t} ; do not have a class that provides methods to call on the data types. The data type \textit{string} is an exception to this as it does have it's own class that can be used when including the library \textit{string}.
 
 \section{Conclusion}
+Ruby was designed to be as object-oriented as possible. Everything had to be an object. Eventhough this is correctly implemented, there are quite some differences with the object-oriented features that are provided by C++. The abscence of certain keywords do not allow features like for example friend classes. Though, most of these features that are not standard available in Ruby, can be implemented by clever use of modules and method implementations.
+
+Does the abscence of certain features make Ruby less object-oriented than C++? Not at all, there is just a difference between the audiences of both languages. C++ is more low-level than Ruby which is why concepts as "everything is an object" and reflection are most of the time obsolete in C++. This is because these concepts make the code possibly more memory-consuming or the program more dynamic than one needs.
+
+Both languages are equipped with a good basis for object-oriented programs, they simply have other implementations basic of the difference in audiences.
 
 \section{References}
 http://www.ruby-lang.org/en/about/
@@ -545,5 +668,7 @@ http://www.cplusplus.com/doc/tutorial/variables/
 http://www.brpreiss.com/books/opus8/html/page597.html
 http://www.java2s.com/Code/Ruby/Class/classvariablevsobjectvariable.htm
 http://cplusplus.co.il/2009/09/01/final-frozen-classes-in-cpp/
+http://www.geeksforgeeks.org/archives/16222
+http://www.metabates.com/2011/02/07/building-interfaces-and-abstract-classes-in-ruby/
 
 \end{document}

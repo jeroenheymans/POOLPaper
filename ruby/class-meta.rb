@@ -1,16 +1,13 @@
-#!/usr/bin/env ruby
-
 class A
-	private_class_method :new
-	def initialize(txt = "Hello!")
-		puts txt
-	end
 end
 
-class B < A
-	public_class_method :new
-end
+#puts A.singleton_class
+#puts A.singleton_class.class
+#puts A.class
+#puts Object.class
+#puts Class.class
+#puts Object.instance_methods
+puts A.ancestors
 
-if __FILE__ == $0
-	puts A.metaclass
-end
+puts A.singleton_class
+puts A.singleton_class.ancestors
