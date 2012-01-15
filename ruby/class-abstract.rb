@@ -1,9 +1,7 @@
-#!/usr/bin/env ruby
-
 class A
 	private_class_method :new
-	def initialize(txt = "Hello!")
-		puts txt
+	def print
+		puts "Hello!"
 	end
 end
 
@@ -11,7 +9,5 @@ class B < A
 	public_class_method :new
 end
 
-if __FILE__ == $0
-	b = B.new
-	a = A.new
-end
+b = B.new # will succeed
+a = A.new # will fail

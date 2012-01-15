@@ -1,26 +1,29 @@
-\contentsline {section}{\numberline {1}Introduction}{1}
-\contentsline {subsection}{\numberline {1.1}Foreword}{1}
-\contentsline {subsection}{\numberline {1.2}The compared languages}{1}
-\contentsline {subsubsection}{\numberline {1.2.1}C++}{1}
-\contentsline {subsubsection}{\numberline {1.2.2}Ruby}{1}
-\contentsline {subsection}{\numberline {1.3}What follows next}{1}
-\contentsline {section}{\numberline {2}Comparisons}{2}
-\contentsline {subsection}{\numberline {2.1}Dynamic versus static typing}{2}
-\contentsline {subsection}{\numberline {2.2}Classes}{2}
-\contentsline {subsubsection}{\numberline {2.2.1}Abstract classes}{2}
-\contentsline {subsubsection}{\numberline {2.2.2}Final classes}{2}
-\contentsline {subsubsection}{\numberline {2.2.3}Friend classes}{3}
-\contentsline {subsubsection}{\numberline {2.2.4}Inner classes}{4}
-\contentsline {subsubsection}{\numberline {2.2.5}Metaclasses}{5}
-\contentsline {subsubsection}{\numberline {2.2.6}Partial classes}{5}
-\contentsline {subsection}{\numberline {2.3}Access control}{5}
-\contentsline {subsubsection}{\numberline {2.3.1}Access control on members}{5}
-\contentsline {subsubsection}{\numberline {2.3.2}Derived classes}{6}
-\contentsline {subsection}{\numberline {2.4}Inheritance}{7}
-\contentsline {subsection}{\numberline {2.5}Polymorphism}{8}
-\contentsline {subsection}{\numberline {2.6}Namespaces/modules}{9}
-\contentsline {subsection}{\numberline {2.7}Reflection}{9}
-\contentsline {subsection}{\numberline {2.8}Interfaces}{9}
-\contentsline {subsection}{\numberline {2.9}Everything is an object?}{9}
-\contentsline {section}{\numberline {3}Conclusion}{10}
-\contentsline {section}{\numberline {4}References}{10}
+\contentsline {section}{\numberline {1}Introduction}{1}{section.1}
+\contentsline {subsection}{\numberline {1.1}Foreword}{1}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}The compared languages}{1}{subsection.1.2}
+\contentsline {subsubsection}{\numberline {1.2.1}C++}{1}{subsubsection.1.2.1}
+\contentsline {subsubsection}{\numberline {1.2.2}Ruby}{1}{subsubsection.1.2.2}
+\contentsline {section}{\numberline {2}Comparisons}{2}{section.2}
+\contentsline {subsection}{\numberline {2.1}Dynamic versus static typing}{2}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Classes}{2}{subsection.2.2}
+\contentsline {subsubsection}{\numberline {2.2.1}Abstract classes}{2}{subsubsection.2.2.1}
+\contentsline {subsubsection}{\numberline {2.2.2}Final classes}{2}{subsubsection.2.2.2}
+\contentsline {subsubsection}{\numberline {2.2.3}Friend classes}{3}{subsubsection.2.2.3}
+\contentsline {subsubsection}{\numberline {2.2.4}Inner classes}{3}{subsubsection.2.2.4}
+\contentsline {subsubsection}{\numberline {2.2.5}Metaclasses}{4}{subsubsection.2.2.5}
+\contentsline {subsubsection}{\numberline {2.2.6}Partial classes}{4}{subsubsection.2.2.6}
+\contentsline {subsection}{\numberline {2.3}Access control}{5}{subsection.2.3}
+\contentsline {subsubsection}{\numberline {2.3.1}Access control on members}{5}{subsubsection.2.3.1}
+\contentsline {subsubsection}{\numberline {2.3.2}Derived classes}{5}{subsubsection.2.3.2}
+\contentsline {subsection}{\numberline {2.4}Inheritance}{6}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Polymorphism}{7}{subsection.2.5}
+\contentsline {subsection}{\numberline {2.6}Namespaces/modules}{8}{subsection.2.6}
+\contentsline {subsection}{\numberline {2.7}Reflection}{8}{subsection.2.7}
+\contentsline {subsection}{\numberline {2.8}Interfaces}{8}{subsection.2.8}
+\contentsline {subsection}{\numberline {2.9}Method overloading}{9}{subsection.2.9}
+\contentsline {subsection}{\numberline {2.10}Constructors}{9}{subsection.2.10}
+\contentsline {subsection}{\numberline {2.11}Destructors}{9}{subsection.2.11}
+\contentsline {subsection}{\numberline {2.12}Everything is an object?}{9}{subsection.2.12}
+\contentsline {section}{\numberline {3}Conclusion}{10}{section.3}
+\contentsline {section}{\numberline {4}References}{10}{section.4}
+\contentsline {section}{\numberline {5}Appendix}{11}{section.5}

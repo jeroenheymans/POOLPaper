@@ -16,7 +16,11 @@ class Cat < Animal
 	end
 end
 
-[Dog, Cat].each do |obj|
-	a = obj.new
-	a.makeNoise
+def print(animal)
+	animal.makeNoise
 end
+
+dog = Dog.new
+cat = Cat.new
+print(dog)
+print(cat)

@@ -19,7 +19,15 @@ class Cat: public Animal {
 		}
 };
 
-void print(Animal* a) {
+class Car {
+	public:
+		void makeNoise() {
+			std::cout << "Vroom!" << std::endl;
+		}
+};
+
+template <class T>
+void print(T* a) {
 	a->makeNoise();
 }
  
@@ -27,7 +35,9 @@ int main()
 {
    Dog* dog = new Dog();
    Cat* cat = new Cat();
+   Car* car = new Car();
    print(dog);
    print(cat);
+   print(car);
    return 0;
 }

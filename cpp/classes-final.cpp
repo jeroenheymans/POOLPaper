@@ -1,6 +1,3 @@
-#include<iostream>
-using namespace std;
- 
 class Final;
  
 class MakeFinal {
@@ -18,7 +15,7 @@ class Derived : public Final { };
  
 int main(int argc, char *argv[])
 {
-    Final f;
-    Derived d;
+    Final f; // compiles
+    Derived d; // compile error
     return 0;
 }

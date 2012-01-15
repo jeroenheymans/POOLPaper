@@ -1,0 +1,29 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}
+\BOOKMARK [2][-]{subsection.1.1}{Foreword}{section.1}
+\BOOKMARK [2][-]{subsection.1.2}{The compared languages}{section.1}
+\BOOKMARK [3][-]{subsubsection.1.2.1}{C++}{subsection.1.2}
+\BOOKMARK [3][-]{subsubsection.1.2.2}{Ruby}{subsection.1.2}
+\BOOKMARK [1][-]{section.2}{Comparisons}{}
+\BOOKMARK [2][-]{subsection.2.1}{Dynamic versus static typing}{section.2}
+\BOOKMARK [2][-]{subsection.2.2}{Classes}{section.2}
+\BOOKMARK [3][-]{subsubsection.2.2.1}{Abstract classes}{subsection.2.2}
+\BOOKMARK [3][-]{subsubsection.2.2.2}{Final classes}{subsection.2.2}
+\BOOKMARK [3][-]{subsubsection.2.2.3}{Friend classes}{subsection.2.2}
+\BOOKMARK [3][-]{subsubsection.2.2.4}{Inner classes}{subsection.2.2}
+\BOOKMARK [3][-]{subsubsection.2.2.5}{Metaclasses}{subsection.2.2}
+\BOOKMARK [3][-]{subsubsection.2.2.6}{Partial classes}{subsection.2.2}
+\BOOKMARK [2][-]{subsection.2.3}{Access control}{section.2}
+\BOOKMARK [3][-]{subsubsection.2.3.1}{Access control on members}{subsection.2.3}
+\BOOKMARK [3][-]{subsubsection.2.3.2}{Derived classes}{subsection.2.3}
+\BOOKMARK [2][-]{subsection.2.4}{Inheritance}{section.2}
+\BOOKMARK [2][-]{subsection.2.5}{Polymorphism}{section.2}
+\BOOKMARK [2][-]{subsection.2.6}{Namespaces/modules}{section.2}
+\BOOKMARK [2][-]{subsection.2.7}{Reflection}{section.2}
+\BOOKMARK [2][-]{subsection.2.8}{Interfaces}{section.2}
+\BOOKMARK [2][-]{subsection.2.9}{Method overloading}{section.2}
+\BOOKMARK [2][-]{subsection.2.10}{Constructors}{section.2}
+\BOOKMARK [2][-]{subsection.2.11}{Destructors}{section.2}
+\BOOKMARK [2][-]{subsection.2.12}{Everything is an object?}{section.2}
+\BOOKMARK [1][-]{section.3}{Conclusion}{}
+\BOOKMARK [1][-]{section.4}{References}{}
+\BOOKMARK [1][-]{section.5}{Appendix}{}

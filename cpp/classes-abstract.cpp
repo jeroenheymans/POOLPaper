@@ -1,18 +1,22 @@
 #include <iostream>
 
-class A {
-	const int a = 1;
+class A // abstract class
+{
 	public:
-		class B {
-			public:
-				void print() {
-					std::cout << a << std::endl;
-				}
-		};
+		virtual void print()=0;
+};
+
+class B // not an abstract class
+{
+	public:
+		void print() {
+			std::cout << "Hello!";
+		}
 };
  
 int main()
 {
-   A* a = new A();
+   A* a = new A(); // compile error here
+   B* b = new B(); // this line compiles correctly
    return 0;
 }

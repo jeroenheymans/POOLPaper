@@ -13,8 +13,6 @@ class Cat < Animal
 	end
 end
 
-if __FILE__ == $0
-	cat = Cat.new
-	cat.speak
-	cat.breath
-end
+c = Cat.new
+c.breath
+c.speak

@@ -1,24 +1,24 @@
 #include <iostream>
 
-class A {
+class A {	
 	public:
-		int foo;
-		A(): foo(0) {};
-		
-	private:
-		void f() { std::cout << "Wazaaa" << std::endl; }
+		void f() { std::cout << "Wazaaa"; }
 };
 
-class B : protected A { };
+class B : public A { 
+	public:
+		void f() { A::f(); }
+};
 
-class C: A { };
+class C: private A { };
  
 int main()
 {
-   /*B* b = new B(); // changing to A* a = new A(); will compile this
-   b->foo = 3;
-   std::cout << "Value foo: " << b->foo << std::endl;*/
+   A* a = new A();
+   B* b = new B();
    C* c = new C();
-   c->f();
+   a->f();
+   b->f(); // does not compile
+   //c->f(); // does not compile
    return 0;
 }
