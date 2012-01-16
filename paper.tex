@@ -48,7 +48,7 @@ When designing Ruby, the creator of Ruby, Ykihiro Matsumoto, looked at other lan
 \section{Comparisons}
 
 \subsection{Dynamic versus static typing}
-C++ is a static typed language while Ruby is a dynamic typed language. Ruby supports duck typing which is a credited to James Whitcomb Riley's words:
+C++ is a static typed language while Ruby is a dynamic typed language. Ruby supports duck typing which is credited to James Whitcomb Riley's words:
 
 \begin{quote}When I see a bird that walks like a duck and swims like a duck and quacks like a duck, I call that bird a duck.\end{quote}
 
@@ -56,13 +56,17 @@ The type of a variable or object is determined at runtime.
 
 Because of the difference in typing, there are some differences in Ruby and C++. For example, in C++ we can have multiple functions or methods with the same number of parameters but with other types. \textit{void foo(int)} and \textit{void foo(float)} are both different functions. In Ruby, this is not possible, only one function or method is allowed with the same name.
 
-Due to the dynamic typed nature of Ruby, there is no need for constructions like templates in C++ to enforce one function or method to accept multiple types. Templates in C++ allow for creating generic functions, methods and classes. For example when we create a Stack class in Ruby, this can take any possible type of variable to put on the stack. In C++ however, because it is static typed, we need to notify upfront what the types of the elements on the stack will be. We could therefore write an \textit{IntegerStack}, \textit{FloatStack}, \textit{StringStack} and so on. With templates however, we can simply define a \textit{Stack\textless T\textgreater } where \textit{T} is the type that the stack will handle.
+Due to the dynamic typed nature of Ruby, there is no need for constructions like templates in C++ to enforce one function or method to accept multiple types. Templates in C++ allow for creating generic functions, methods and classes. For example when we create a Stack class in Ruby, this can take any possible type of variable to put on the stack. 
+
+In C++ however, because it is static typed, we need to notify upfront what the types of the elements on the stack will be. We could therefore write an \textit{IntegerStack}, \textit{FloatStack}, \textit{StringStack} and so on. With templates however, we can simply define a \textit{Stack\textless T\textgreater } where \textit{T} is the type that the stack will handle.
+
+We must notify though that eventhough templates enable us to create a more generic version of a stack, this version is still not as generic as in Ruby. Because we still need to notify the type of the objects on the stack, we are limited to objects of this type. In Ruby, we can add anything we like on a stack without worrying that we combine strings, integers or other objects.
 
 \subsection{Classes}
-In object-oriented programming, a class is a blueprint that is used to construct objects which we call instances. We compare the several types of classes that can be made in Ruby and C++.
+In object-oriented programming, a class is a blueprint that is used to construct objects. We call these constructed objects instances of a class. We compare the several types of classes that can be made in Ruby and C++.
 
 \subsubsection{Abstract classes}
-An abstract class is a class that can not be instantiated for it is either labelled as abstract or it specifies abstract methods. The general idea of abstract classes is that the class must be extended. In C++, an abstract class is a class having at least one pure virtual function. An example can be found in listing 1 in the appendix.
+An abstract class is a class that can not be instantiated for it is either labelled as abstract or it specifies abstract methods. The general idea of abstract classes is that the class must be extended in order to gain access to the methods and members of the abstract class. In C++, an abstract class is a class having at least one pure virtual function. An example can be found in listing 1 in the appendix.
 
 If we are trying to compile C++ code where we instantiate an abstract class, we will receive an error message from the compiler that notifies us that this operation is not allowed:
 
@@ -84,7 +88,7 @@ Abstract classes in Ruby are a different story. Unlike some object-oriented lang
 \subsubsection{Final classes}
 A final class is a class that can not be extended. This could be done for reasons of security and efficiency. Final classes are not supported in C++ nor Ruby. However, there exist mechanisms to prevent programmers from extending other classes. An example of such a mechanism in C++ can be found in listing 3 of the appendix.
 
-In this example, we made the class named Final final. We did this by creating a class Final that inherits from the class MakeFinal. In class MakeFinal, we have a private constructor which can only be called by the class Final as the class Final is marked as \textit{friend}. By inheriting MakeFinal \textit{virtual} in the class Final, we make sure that the constructor \textit{MakeFinal()} must be called if we derive the class Final. As only Final is a friend, this will generate a compile error that notifies us that \textit{MakeFinal()} is private if we would try to instantiate MakeFinal or to create an instance of MakeFinal. Via this mechanism, we have ensured that the class named Final is really final. 
+In this example, we made the class named Final final. We did this by creating a class Final that inherits from the class MakeFinal. In class MakeFinal, we have a private constructor which can only be called by the class Final as the class Final is marked as \textit{friend}. By inheriting MakeFinal \textit{virtual} in the class Final, we make sure that the constructor \textit{MakeFinal()} must be called if we derive the class Final. As only Final is a friend, this will generate a compile error that notifies us that \textit{MakeFinal()} is private if we would try to create an instance of MakeFinal. Via this mechanism, we have ensured that the class named Final is really final. 
 
 In Ruby, we can create a similar mechanism as can be found in listing 4 of the appendix. In this example, we add a method \textit{final} to the standardclass \textit{Class}. In this method \textit{final}, we define that a new method called \textit{inherited} should be added to the class given by the parameter \textit{klass}. If we then add a call to \textit{final} to our own defined class, the code for the method \textit{inherited} will be injected in our own class. \textit{inherited} is a method that will always be called whenever we try to inherit the class that contains this method. In our example, this will cause a \textit{RuntimeError}, thus disallowing the programmer to continue programming as long as we try to inherit from our \textit{final} class.
 
@@ -149,7 +153,7 @@ If you do not want that classes are further extended in Ruby, then the possibili
 
 \subsection{Access control}
 
-\subsubsection{Access control on members}
+\subsubsection{Access control on members and methods}
 C++ offers three keywords that define access control on members and methods of classes: \textit{public}, \textit{protected} or \textit{private}. 
 
 \begin{itemize}
@@ -158,9 +162,9 @@ C++ offers three keywords that define access control on members and methods of c
 \item \textit{private}: only the class that defines the member/method and the friend classes of the class can access the member/method
 \end{itemize}
 
-Ruby also provides these three keywords but there are some subtle differences. We will now explain one difference, the rest will be explained in the following section. The difference between Ruby and C++ can be found in the objects on which a private method is called or a private member is requested. The C++ code that explains this can be found in listing 8 in the appendix and the Ruby code in listing 9 in the appendix. As you can see, we have a class A in which the \textit{test()}-method accepts a parameter to an A object. All three calls to the method \textit{foo()} work: with an implicit receiver and an explicit receiver like \textit{this} or \textit{a}. If we try the Ruby equivalent of this code, we get into trouble.
+Ruby also provides these three keywords but there are some subtle differences. The difference between Ruby and C++ can be found in the objects on which a private method is called or a private member is requested. The C++ code that explains this can be found in listing 8 in the appendix and the Ruby code in listing 9 in the appendix. As you can see, we have a class A in which the \textit{test()}-method accepts a parameter to an A object. All three calls to the method \textit{foo()} work: with an implicit receiver and an explicit receiver like \textit{this} or \textit{a}. We can conclude that in C++, it is possible to access private members and methods from an object, as long as it is the type of object as where the actual calls are done. 
 
-Both the lines \textit{self.foo} and \textit{obj.foo} generate the same error: \textit{NoMethodError}. This is because we use an explicit receiver. If you want to access a private member or method in Ruby, you can only use an implicit receiver. With any explicit receiver, even if that is \textit{self}, the \textit{NoMethodError} will be generated. We can conclude that Ruby depends on the type of the receiver if it will give you access to a private member or not.
+If we try the Ruby equivalent of this code, we get into trouble. Both the lines \textit{self.foo} and \textit{obj.foo} generate the same error: \textit{NoMethodError}. This is because we use an explicit receiver. If you want to access a private member or method in Ruby, you can only use an implicit receiver. With any explicit receiver, even if that is \textit{self}, the \textit{NoMethodError} will be generated. We can conclude that Ruby depends on the type of the receiver if it will give you access to a private member or not. Only with an implicit receiver will you gain access to private members or methods, even if the explicit receiver is \textit{self}.
 
 In C++, this distinction does not exist. As long as you try to access the private member or method from code that is defined in the private member or method of his class, everything is okay. So if we have a private member \textit{test} in a class A, we can even access that member via an object instantiated from A that is not equal to \textit{this}, as long as the code is placed in the body of class A. Note: we have seen in the section "Friend classes" that friends of a class also have access to the private members and methods from a class.
 
@@ -378,7 +382,7 @@ One of the main features of Ruby is the fact that everything is an object, even 
 This will generate the output: \textit{44444}. What it does is take an object \textit{5} of the type Number, call the method \textit{times} on it so it excecutes five times the part between { and }. The code \textit{print "test".length} will be excecuted five times which is effectively printing the length of the String object "test".
 
 In C++, not everything acts as an object. The primitive data types: \textit{char}, \textit{short}, \textit{int}, \textit{long}, \textit{bool}, \textit{float}, \textit{double}, \textit{long double} and \textit{wchar\_t} ; do not have a class that provides methods to call on the data types. The data type \textit{string} is an exception to this as it does have its own class that can be used when including the library \textit{string}.
-\pagebreak
+
 \section{Conclusion}
 Ruby was designed to be as object-oriented as possible. Everything had to be an object. Eventhough this is correctly implemented, there are quite some differences with the object-oriented features that are provided by C++. The abscence of certain keywords do not allow features like for example friend classes. Though, most of these features that are not standard available in Ruby, can be implemented by clever use of modules and method implementations.
 

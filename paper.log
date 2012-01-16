@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.12.24)  15 JAN 2012 22:50
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.12.24)  16 JAN 2012 23:00
 entering extended mode
  %&-line parsing enabled.
 **paper.tex
@@ -357,209 +357,207 @@ File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 
 
 ]
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 59.
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 61.
 
 (/usr/share/texmf-texlive/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/it' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 59.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 61.
 
-Underfull \hbox (badness 1990) in paragraph at lines 62--63
+Underfull \hbox (badness 1990) in paragraph at lines 66--67
 \OT1/cmr/m/n/10 In object-oriented pro-gram-ming, a class is a
  []
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 77.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 81.
 (/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <7> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 77.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 81.
  [2]
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 106.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 110.
 
-Underfull \hbox (badness 10000) in paragraph at lines 112--112
+Underfull \hbox (badness 10000) in paragraph at lines 116--116
 [][][]\OT1/cmr/m/n/8 An ex-am-ple can be found on
  []
 
-(/usr/share/texmf-texlive/tex/latex/listings/lstlang1.sty
+[3] (/usr/share/texmf-texlive/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2004/09/05 1.3 listings language file
 )
 (/usr/share/texmf-texlive/tex/latex/listings/lstlang2.sty
 File: lstlang2.sty 2004/09/05 1.3 listings language file
-) [3] [4] [5]
-LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <7> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 200.
+) [4]
+Underfull \hbox (badness 4036) in paragraph at lines 156--156
+[]\OT1/cmr/bx/n/10 Access con-trol on mem-bers and
+ []
 
-<diamond.png, id=211, 113.42375pt x 169.63374pt>
+[5]
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <7> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 204.
+ [6] <diamond.png, id=243, 113.42375pt x 169.63374pt>
 File: diamond.png Graphic file (type png)
- <use diamond.png> [6] [7 <./diamond.png (PNG copy)>] [8]
-Underfull \hbox (badness 7468) in paragraph at lines 366--366
+ <use diamond.png>
+[7 <./diamond.png (PNG copy)>] [8]
+Underfull \hbox (badness 7468) in paragraph at lines 370--370
 [][][]\OT1/cmr/m/n/8 Can be found on http://www.ruby-doc.org/core-
  []
 
 
-Underfull \hbox (badness 1960) in paragraph at lines 366--367
+Underfull \hbox (badness 1960) in paragraph at lines 370--371
 \OT1/cmr/m/n/10 Natively, Ruby does not sup-port de-struc-tors.
  []
 
-
-Underfull \vbox (badness 1603) has occurred while \output is active []
-
- [9]
-Underfull \hbox (badness 10000) in paragraph at lines 393--394
+[9]
+Underfull \hbox (badness 10000) in paragraph at lines 397--398
 [][]$\OT1/cmtt/m/n/10 http : / / publib . boulder . ibm . com /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 393--394
+Underfull \hbox (badness 10000) in paragraph at lines 397--398
 \OT1/cmtt/m/n/10 infocenter / lnxpcomp / v8v101 / index .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 393--394
+Underfull \hbox (badness 10000) in paragraph at lines 397--398
 \OT1/cmtt/m/n/10 jsp ? topic = %2Fcom . ibm . xlcpp8l . doc %
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 394--395
+Underfull \hbox (badness 10000) in paragraph at lines 398--399
 [][]$\OT1/cmtt/m/n/10 http : / / www . klankboomklang . com / 2007 / 10 /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 395--396
+Underfull \hbox (badness 10000) in paragraph at lines 399--400
 [][]$\OT1/cmtt/m/n/10 http : / / ruby-[]extra . rubyforge . org /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 396--397
+Underfull \hbox (badness 10000) in paragraph at lines 400--401
 [][]$\OT1/cmtt/m/n/10 http : / / www . wikyblog . com / AmanKing /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 397--398
+Underfull \hbox (badness 10000) in paragraph at lines 401--402
 [][]$\OT1/cmtt/m/n/10 http : / / www . klankboomklang .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 397--398
+Underfull \hbox (badness 10000) in paragraph at lines 401--402
 \OT1/cmtt/m/n/10 com / 2007 / 10 / 12 /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 398--399
+Underfull \hbox (badness 10000) in paragraph at lines 402--403
 [][]$\OT1/cmtt/m/n/10 http : / / shiningthrough . co . uk /
  []
 
 
-Overfull \hbox (39.24797pt too wide) in paragraph at lines 398--399
+Overfull \hbox (39.24797pt too wide) in paragraph at lines 402--403
 \OT1/cmtt/m/n/10 A-[]comparison-[]of-[]Ruby-[]pass-[]by-[]reference-[]and-[]C +
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 399--400
+Underfull \hbox (badness 10000) in paragraph at lines 403--404
 [][]$\OT1/cmtt/m/n/10 http : / / rubylearning . com / satishtalim /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 400--401
+Underfull \hbox (badness 10000) in paragraph at lines 404--405
 [][]$\OT1/cmtt/m/n/10 http : / / publib . boulder . ibm . com /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 400--401
+Underfull \hbox (badness 10000) in paragraph at lines 404--405
 \OT1/cmtt/m/n/10 infocenter / lnxpcomp / v8v101 / index .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 400--401
+Underfull \hbox (badness 10000) in paragraph at lines 404--405
 \OT1/cmtt/m/n/10 jsp ? topic = %2Fcom . ibm . xlcpp8l . doc %
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 401--402
+Underfull \hbox (badness 10000) in paragraph at lines 405--406
 [][]$\OT1/cmtt/m/n/10 http : / / www . skorks . com / 2010 / 04 /
  []
 
 
-Overfull \hbox (176.74678pt too wide) in paragraph at lines 401--402
+Overfull \hbox (176.74678pt too wide) in paragraph at lines 405--406
 \OT1/cmtt/m/n/10 ruby-[]access-[]control-[]are-[]private-[]and-[]protected-[]me
 thods-[]only-[]a-[]guideline/$[] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 402--403
+Underfull \hbox (badness 10000) in paragraph at lines 406--407
 [][]$\OT1/cmtt/m/n/10 http : / / weblog . jamisbuck . org / 2007 / 2 / 23 /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 403--404
+Underfull \hbox (badness 10000) in paragraph at lines 407--408
 [][]$\OT1/cmtt/m/n/10 http : / / stackoverflow .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 403--404
+Underfull \hbox (badness 10000) in paragraph at lines 407--408
 \OT1/cmtt/m/n/10 com / questions / 137661 /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 404--405
+Underfull \hbox (badness 10000) in paragraph at lines 408--409
 [][]$\OT1/cmtt/m/n/10 http : / / www . cplusplus . com / doc / tutorial /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 405--406
+Underfull \hbox (badness 10000) in paragraph at lines 409--410
 [][]$\OT1/cmtt/m/n/10 http : / / www . brpreiss . com / books / opus8 /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 406--407
+Underfull \hbox (badness 10000) in paragraph at lines 410--411
 [][]$\OT1/cmtt/m/n/10 http : / / www . java2s . com / Code / Ruby / Class /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 407--408
+Underfull \hbox (badness 10000) in paragraph at lines 411--412
 [][]$\OT1/cmtt/m/n/10 http : / / cplusplus . co . il / 2009 / 09 / 01 /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 408--409
+Underfull \hbox (badness 10000) in paragraph at lines 412--413
 [][]$\OT1/cmtt/m/n/10 http : / / www . geeksforgeeks . org / archives /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 409--410
+Underfull \hbox (badness 10000) in paragraph at lines 413--414
 [][]$\OT1/cmtt/m/n/10 http : / / www . metabates . com / 2011 / 02 / 07 /
  []
 
 
-Overfull \hbox (59.24779pt too wide) in paragraph at lines 409--410
+Overfull \hbox (59.24779pt too wide) in paragraph at lines 413--414
 \OT1/cmtt/m/n/10 building-[]interfaces-[]and-[]abstract-[]classes-[]in-[]ruby/$
 [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 410--411
+Underfull \hbox (badness 10000) in paragraph at lines 414--415
 [][]$\OT1/cmtt/m/n/10 http : / / publib . boulder . ibm . com /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 410--411
+Underfull \hbox (badness 10000) in paragraph at lines 414--415
 \OT1/cmtt/m/n/10 infocenter / lnxpcomp / v8v101 / index .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 410--411
+Underfull \hbox (badness 10000) in paragraph at lines 414--415
 \OT1/cmtt/m/n/10 jsp ? topic = %2Fcom . ibm . xlcpp8l . doc %
  []
 
-
-Underfull \vbox (badness 3364) has occurred while \output is active []
-
- [10]
-(./cpp/classes-abstract.cpp) (./ruby/class-abstract.rb)
+[10] (./cpp/classes-abstract.cpp) (./ruby/class-abstract.rb)
 (./cpp/classes-final.cpp) (./ruby/class-final.rb) (./cpp/classes-inner.cpp)
 (./ruby/class-inner.rb [11]) (./ruby/class-partial.rb)
 (./cpp/classes-access-control.cpp) (./ruby/class-access-control.rb)
@@ -593,9 +591,9 @@ exlive/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-texlive/fonts
 /type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-texlive/fonts/type1/publ
 ic/amsfonts/cm/cmti7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/
 cm/cmtt10.pfb>
-Output written on paper.pdf (13 pages, 375746 bytes).
+Output written on paper.pdf (13 pages, 377167 bytes).
 PDF statistics:
- 915 PDF objects out of 1000 (max. 8388607)
+ 916 PDF objects out of 1000 (max. 8388607)
  526 named destinations out of 1000 (max. 500000)
  238 words of extra memory for PDF output out of 10000 (max. 10000000)
 
