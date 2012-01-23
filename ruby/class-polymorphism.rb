@@ -16,11 +16,19 @@ class Cat < Animal
 	end
 end
 
+class Car
+	def makeNoise
+		puts "Vroom!"
+	end
+end
+
 def print(animal)
 	animal.makeNoise
 end
 
 dog = Dog.new
 cat = Cat.new
+car = Car.new
 print(dog)
 print(cat)
+print(car)

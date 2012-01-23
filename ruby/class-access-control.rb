@@ -5,8 +5,8 @@ class A
 	public
 		def test(obj)
 			foo
-			#self.foo
-			#obj.foo
+			self.foo
+			obj.foo
 		end
 end
 
