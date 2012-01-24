@@ -1,4 +1,4 @@
-module Animals
+module A
 	def foo
 		puts "Module A"
 	end
